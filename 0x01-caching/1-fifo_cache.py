@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-""" Python Module """
-
+"""Python Module"""
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """ FIFOCache class """
+    """FIFOCahe class"""
 
     def __init__(self):
         super().__init__()
         self.queue = []
 
-
     def put(self, key, item):
-        """ Puts item in cache """
+        """Put in cache"""
         if key is None or item is None:
             return
 
@@ -24,21 +22,19 @@ class FIFOCache(BaseCaching):
 
         self.cache_data[key] = item
 
-        if len(self.cacheK_data) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             initial = self.get_first_list(self.queue)
             if initial:
                 self.queue.pop(0)
                 del self.cache_data[initial]
                 print("DISCARD: {}".format(initial))
 
-
     def get(self, key):
-        """ Get item for cache """
+        """Get form cache"""
         return self.cache_data.get(key, None)
 
     def mv_last_list(self, item):
-        """ Moves element """
-
+        """Moves element"""
         length = len(self.queue)
         if self.queue[length - 1] != item:
             self.queue.remove(item)
@@ -46,5 +42,5 @@ class FIFOCache(BaseCaching):
 
     @staticmethod
     def get_first_list(array):
-        """ Get the first element """
+        """Get first element"""
         return array[0] if array else None
